@@ -10,7 +10,7 @@
 * 将学年论文并不需要的英文摘要，致谢等删掉
 * 将封面英文标题删掉，加入副标题
 
-下载地址：[Link](https://github.com/YijunYuan/ECNU-Undergraduate-LaTeX/archive/master.zip)
+下载地址：[Link](https://github.com/Mr-Zhao-cloud/ECNU-Undergraduate-LaTeX-2021.git)
 
 本项目中`gb7714-2015.bbx`与`gb7714-2015.cbx`两个文件为[hushidong](https://github.com/hushidong)的所做满足GB/T7714-2015标准的[biblatex样式包](https://github.com/hushidong/biblatex-gb7714-2015)。
 
