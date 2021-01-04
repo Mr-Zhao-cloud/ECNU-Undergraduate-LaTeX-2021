@@ -1,0 +1,193 @@
+%不要改动，除非你知道自己在做什么
+%不要改动，除非你知道自己在做什么
+%不要改动，除非你知道自己在做什么
+\usepackage[thmmarks,hyperref]{ntheorem} %定义命令环境使用的宏包
+\usepackage[heading,zihao=-4]{ctex} %用来提供中文支持
+\usepackage{amsmath,amssymb} %数学符号等相关宏包
+\usepackage{graphicx} %插入图片所需宏包
+\usepackage{xspace} %提供一些好用的空格命令
+\usepackage{tikz-cd} %画交换图需要的宏包
+\usepackage{url} %更好的超链接显示
+\usepackage{array,booktabs} %表格相关的宏包
+\usepackage{caption} %实现图片的多行说明
+\usepackage{float} %图片与表格的更好排版
+\usepackage{ulem} %更好的下划线
+\usepackage[top=2.5cm, bottom=2.0cm, left=3.0cm, right=2.0cm]{geometry} %设置页边距
+
+\usepackage{fontspec} %设置字体需要的宏包
+
+%设置西文字体为Times New Roman，如果没有则以开源近似字体代替
+\IfFontExistsTF{Times New Roman}{
+	\setmainfont{Times New Roman}
+}{
+	\usepackage{newtxtext,newtxmath}
+}
+
+%设置文档中文字体。优先次序：中易 > Adobe > 华文(Mac) > Fandol
+\IfFontExistsTF{SimSun}{
+	\setCJKmainfont[AutoFakeBold=2,ItalicFont=KaiTi]{SimSun}
+}{
+	\IfFontExistsTF{AdobeSongStd-Light}{
+		\setCJKmainfont[AutoFakeBold=2,ItalicFont=AdobeKaitiStd-Regular]{AdobeSongStd-Light}
+	}{
+		\IfFontExistsTF{STSong}{
+			\setCJKmainfont[AutoFakeBold=2,BoldFont=STHeiti,ItalicFont=STKaiti]{STSong}
+		}{
+			\setCJKmainfont[AutoFakeBold=2,ItalicFont=FandolKai-Regular]{FandolSong-Regular}
+		}
+	}
+}
+\IfFontExistsTF{SimHei}{
+	\setCJKsansfont[AutoFakeBold=2]{SimHei}
+}{
+	\IfFontExistsTF{AdobeHeitiStd-Regular}{
+		\setCJKsansfont[AutoFakeBold=2]{AdobeHeitiStd-Regular}
+	}{
+		\IfFontExistsTF{STHeiti}{
+			\setCJKsansfont [AutoFakeBold=2]{STHeiti}
+		}{
+			\setCJKsansfont[AutoFakeBold=2]{FandolHei-Regular}
+		}
+	}
+}
+
+
+\IfFileExists{zhlineskip.sty}{
+	%Microsoft Word 样式的1.5倍行距（按中易字体计算）
+	\usepackage[
+		restoremathleading=false,
+		UseMSWordMultipleLineSpacing,
+		MSWordLineSpacingMultiple=1.5
+	]{zhlineskip}
+}{
+	\linespread{1.621} %1.5倍行距
+}
+
+\showboxdepth=5
+\showboxbreadth=5
+\setcounter{secnumdepth}{5}
+
+%%设置标题格式
+\ctexset{
+	section={
+		%format用于设置章节标题全局格式，作用域为标题和编号
+		%字号为小四，字体为黑体，左对齐
+		%+号表示在原有格式下附加格式命令
+		format+ = \zihao{-4} \heiti \raggedright,
+		%name用于设置章节编号前后的词语
+		%前、后词语用英文状态下,分开
+		%如果没有前或后词语可以不填
+		name = {,、},
+		%number用于设置章节编号数字输出格式
+		%输出section编号为中文
+		number = \chinese{section},
+		%beforeskip用于设置章节标题前的垂直间距
+		%ex为当前字号下字母x的高度
+		%基础高度为1.0ex，可以伸展到1.2ex，也可以收缩到0.8ex
+		beforeskip = 1.0ex plus 0.2ex minus .2ex,
+		%afterskip用于设置章节标题后的垂直间距
+		afterskip = 1.0ex plus 0.2ex minus .2ex,
+		%aftername用于控制编号和标题之间的格式
+		%\hspace用于增加水平间距
+		aftername = \hspace{0pt}
+	},
+	subsection={
+		format+ = \zihao{-4} \heiti ,
+		%仅输出subsection编号且为中文
+		number = \chinese{subsection},
+		name = {（,）},
+		beforeskip = 1.0ex plus 0.2ex minus .2ex,
+		afterskip = 1.0ex plus 0.2ex minus .2ex,
+		aftername = \hspace{0pt}
+	},
+	subsubsection={
+		%设置对齐方式为居中对齐
+		format+ = \zihao{-4} \heiti,
+		indent={2em},
+		%仅输出subsubsection编号，格式为阿拉伯数字，打字机字体
+		number = \ttfamily\arabic{subsubsection},
+		name = {,.},
+		beforeskip = 1.0ex plus 0.2ex minus .2ex,
+		afterskip = 1.0ex plus 0.2ex minus .2ex,
+		aftername = \hspace{0pt}
+	},
+	paragraph={
+		format+ = \zihao{-4} ,
+		indent={2em},
+		%格式为阿拉伯数字，打字机字体
+		number = {\arabic{paragraph}},
+		name = {（,）},
+		beforeskip = 1.0ex plus 0.2ex minus .2ex,
+		afterskip = 1.0ex plus 0.2ex minus .2ex,
+		aftername = \hspace{0pt}
+	}
+}
+
+\usepackage[bottom,perpage]{footmisc}               %脚注，显示在每页底部，编号按页重置
+\renewcommand*{\footnotelayout}{\zihao{-5}\rmfamily}  %设置脚注为小五号宋体
+\renewcommand{\thefootnote}{\textcircled{\arabic{footnote}}}    %设置脚注标记为①，②，...
+
+%设置页眉页脚
+\usepackage{fancyhdr}
+\lhead{华东师范大学本科生学年论文}
+\chead{}
+\rhead{\Title}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+\usepackage{xcolor} %彩色的文字
+
+\usepackage[hidelinks]{hyperref} %各种超链接必备
+\usepackage{cleveref} %交叉引用
+
+%允许公式跨页显示
+\allowdisplaybreaks
+
+%屏蔽无关的Warning
+\usepackage{silence}
+\WarningFilter*{biblatex}{Conflicting options.\MessageBreak'eventdate=iso' requires 'seconds=true'.\MessageBreak Setting 'seconds=true'}
+
+
+
+%使用biblatex管理文献，输出格式使用gb7714-2015标准，后端为biber
+\usepackage[backend=biber,style=gb7714-2015,hyperref=true]{biblatex}
+%将参考文献字体设置为五号
+\renewcommand*{\bibfont}{\zihao{5}}
+
+
+%表格单元格内换行
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+%设置图、表的编号格式
+\renewcommand{\thefigure}{\arabic{section}-\arabic{figure}}
+\renewcommand{\thetable}{\arabic{section}-\arabic{table}}
+%%每个section开始重置图、表的计数器
+\makeatletter
+\@addtoreset{table}{section}
+\makeatother
+\makeatletter
+\@addtoreset{figure}{section}
+\makeatother
+
+%显示 1、2级标题
+\setcounter{tocdepth}{2}
+
+%设置目录字体
+\usepackage{tocloft}
+\renewcommand{\contentsname}{\centerline{目录}}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cfttoctitlefont}{\sffamily \bfseries \zihao{-4}}
+\renewcommand{\cftsubsubsecfont}{\rmfamily}
+\renewcommand{\cftsubsecfont}{\rmfamily}
+\renewcommand{\cftsecfont}{\rmfamily}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecfont}{}
+\renewcommand{\cftsecpagefont}{}
+
+%灵活的行距定义（用于封面）
+\usepackage{setspace}
+%使用绝对坐标制作封面使用的宏包
+\usepackage[absolute,overlay]{textpos}
+  \setlength{\TPHorizModule}{1mm}
+  \setlength{\TPVertModule}{1mm}

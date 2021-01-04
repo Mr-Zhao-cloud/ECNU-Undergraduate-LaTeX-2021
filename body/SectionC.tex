@@ -1,0 +1,51 @@
+\section{公式测试}这节用来展示公式，交换图等。
+ 
+\subsection{行内公式}
+典范的同态$\lim_{\leftarrow F} W_r(S)\rightarrow \lim_{\leftarrow F} W_r(S/\pi S )$是同构。
+
+\subsection{整行公式}
+$$\mathbb{A}_{inf}=W(S^\flat)\cong \lim_{\leftarrow F} W_r(S)$$
+
+\subsection{多行公式}
+
+\subsubsection{align环境}
+\begin{align*}
+    \operatorname{E} (Z_{n+1} - Z_n | X_1,..., X_n)
+    &= \operatorname{E} (S_{n+1}^2 - (n+1) \sigma^2 - S_n^2 + n \sigma^2 | X_1,..., X_n) \\
+    &= \operatorname{E} (S_{n+1}^2 - S_n^2 - (n+1) \sigma^2 + n \sigma^2 | X_1,..., X_n) \\
+    &= \operatorname{E} (X_{n+1}(X_{n+1} + 2\sum_{i=1}^n X_i) - \sigma^2 | X_1,..., X_n) \\
+    &= \operatorname{E} (X_{n+1}X_{n+1})
+       + 2\operatorname{E} (X_{n+1}) \sum_{i=1}^n X_i - \sigma^2 \\
+    &= \sigma^2  - \sigma^2 =0.
+\end{align*}
+
+\subsubsection{带大括号的多行公式}
+\paragraph{cases}
+$$
+    f=
+    \begin{cases}
+      x + y = z,  \\
+      1 + 2 = 3.  \\
+    \end{cases}
+$$
+
+\paragraph{array}
+$$ F^{HLLC}=\left\{
+\begin{array}{rcl}
+F_L       &      & {0      <      S_L}\\
+F^*_L     &      & {S_L \leq 0 < S_M}\\
+F^*_R     &      & {S_M \leq 0 < S_R}\\
+F_R       &      & {S_R \leq 0}
+\end{array} \right. $$
+    
+\paragraph{aligned}
+\begin{equation}
+    \left\{
+     \begin{aligned}
+     \overset{.}x(t) &=A_{ci}x(t)+B_{1ci}w(t)+B_{2ci}u(t)  \\
+     z(t) &=C_{ci}x(t)+D_{ci}u(t) \\
+     \end{aligned}
+     \right.
+\end{equation}
+
+

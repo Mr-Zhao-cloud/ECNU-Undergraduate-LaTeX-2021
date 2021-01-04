@@ -1,0 +1,71 @@
+% !TEX root
+% !TEX program = xelatex
+% !BIB program = biber
+
+% \def \PrintMode{} %在使用电子版论文时，请将此行注释。在打印纸质论文时，请保持本行命令不被注释，然后打印时选择双面打印即可。
+
+%用来控制是否启动打印模式的宏，请勿改动。
+\ifx \PrintMode \undefined
+    \def \SideMode{oneside}
+    \def \ClearPageStyle{\clearpage}
+\else
+    \def \SideMode{twoside}
+    \def \ClearPageStyle{\cleardoublepage}
+\fi
+
+\documentclass[a4paper,\SideMode,UTF8]{article} %设置A4纸，UTF-8编码
+
+\input{packages_and_settings.tex} %加载各宏包以及本模板的主要设置
+\addbibresource{./reference/thesis-ref.bib} %加载bib文件（参考文献）
+
+\begin{document}
+
+\pagestyle{empty} %不对正文前的各页面使用页眉页脚
+\newgeometry{top=2.0cm, bottom=2.0cm,left=3.18cm, right=3.18cm} %设置用于首页的页边距
+\input{./preface/inner-cover.tex} %插入内封面
+\ClearPageStyle   %下一页
+
+
+\restoregeometry %生成目录
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\begin{spacing}{1}
+    \tableofcontents
+\end{spacing}
+\ClearPageStyle %下一页
+
+\pagenumbering{Roman}
+\input{./preface/abstract.tex} %生成中文摘要及关键词
+\ClearPageStyle %下一页
+
+
+\pagenumbering{arabic}
+\pagestyle{fancy} %开始使用页眉页脚
+\setcounter{page}{1} %论文页码从正文开始记数
+
+\input{./body/SectionA.tex} %正文第一章
+\input{./body/SectionC.tex} %正文第二章
+\input{./body/SectionD.tex} %正文第三章
+
+
+\ClearPageStyle
+
+%生成参考文献:生成参考文献有两种方法，一种是不使用BibTeX，一种是使用BibTeX，两种方法均在后面给出，根据需要注释掉一种
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%使用使用BibTeX
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\printbibliography[title={\centerline{\bfseries\sffamily \zihao {-3}参考文献}}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%不使用BibTeX，将导出的参考文献直接附在 \bibitem{ref1} 后面，顺序自己手动编好，latex不会自动排序  
+                                                                                                                                                                                                                     %
+% \begin{thebibliography}{99} %99表示多少个参考文献  
+% \small    %五号字体                                                                                                                                                                        %
+% \bibitem{ref1}Zheng L, Wang S, Tian L, et al., Query-adaptive late fusion for image search and person re-identification, Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015: 1741-1750.                     %
+% \bibitem{ref2}Arandjelović R, Zisserman A, Three things everyone should know to improve object retrieval, Computer Vision and Pattern Recognition (CVPR), 2012 IEEE Conference on, IEEE, 2012: 2911-2918.                                    % 
+% \bibitem{ref3}Lowe D G. Distinctive image features from scale-invariant keypoints, International journal of computer vision, 2004, 60(2): 91-110.                                                                                            %
+% \bibitem{ref4}Philbin J, Chum O, Isard M, et al. Lost in quantization: Improving particular object retrieval in large scale image databases, Computer Vision and Pattern Recognition, 2008. CVPR 2008, IEEE Conference on, IEEE, 2008: 1-8.  % 
+% \end{thebibliography}                                                                                                                                                                                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document} 
